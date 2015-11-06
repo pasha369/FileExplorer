@@ -1,0 +1,64 @@
+﻿<!doctype html>
+<html data-ng-app="fileApp">
+<head>
+    <meta charset="utf-8">
+    <title>Resource Manager</title>
+
+    <link rel="stylesheet" href="Content/font-awesome.min.css" />
+    <link rel="stylesheet" href="Content/bootstrap.min.css"/>
+    <link rel="stylesheet" href="Content/custom.css"/>
+
+</head>
+<body>
+    <div ng-controller="indexController" class="container">
+        <loading></loading>
+
+        <div class="content col-md-5">
+            <div class="head-title">
+                <h3>{{host}}</h3>
+            </div>
+            <div>Current dir: {{currentDir}}</div>
+
+            <div class="margin-top-20">
+                <div class="row">
+                    <div class="col-md-6"><= 10 mb count: </div>
+                    <div class="col-md-6">{{less10Mb}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">> 10mb and <= 50mb count: </div>
+                    <div class="col-md-6">{{mb10Mb50}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">>= 100 mb count: </div>
+                    <div class="col-md-6">{{more100Mb}}</div>
+                </div>
+            </div>
+
+            <h4>Browse: </h4>
+
+            <div class="margin-top-20">
+                <ul class="list-inline" ng-repeat="file in files track by $index">
+                    <li data-ng-click="getFiles(file)"><i class="fa fa-file-o"></i> {{file}}/li>
+                </ul>
+                <ul class="list-inline" ng-repeat="dir in dirs track by $index">
+                    <li data-ng-click="getFiles(dir)"><i class="fa fa-folder-o"></i> {{dir}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <!-- angular -->
+    <script src="/Scripts/angular.min.js"></script>
+    <script src="/Scripts/angular-resource.min.js"></script>
+    <script src="/Scripts/angular-route.min.js"></script>
+    <script src="/Scripts/angular-animate.min.js"></script>
+    <!-- app -->
+    <script src="/Scripts/app/app.js"></script>
+    <script src="/Scripts/app/controllers/indexController.js"></script>
+    <script src="/Scripts/app/services/fileService.js"></script>
+    <script src="/Scripts/app/directives/ajaxLoading.js"></script>
+</body>
+</html>

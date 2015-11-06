@@ -1,0 +1,34 @@
+﻿.loading-spiner-holder {
+    position: fixed;
+    background: white;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+}
+
+.loading-spiner {
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+ul > li {
+    cursor: pointer;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.content {
+    border: 1px solid black;
+}
+
+.head-title {
+    border-bottom: 1px solid black;
+}
