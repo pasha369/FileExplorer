@@ -1,11 +1,9 @@
 # FileExplorer
 
 Server side: 
-* ASP.NET MVC
-
+* ASP.NET WebAPI
 Client side:
 * AngularJS
-
 View:
 * Bootstrap Twitter
 * FontAwesome 
