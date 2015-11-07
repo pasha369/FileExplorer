@@ -39,6 +39,7 @@ namespace FileExplorer.Controllers
             Folder folder = new Folder();
 
             folder.CurrentDir = "";
+            folder.Host = HttpContext.Current.Request.Url.Host;
             var dirs = DriveInfo.GetDrives().Select(dir => dir.Name);
             foreach (var dir in dirs)
             {
