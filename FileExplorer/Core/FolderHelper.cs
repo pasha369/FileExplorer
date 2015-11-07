@@ -56,11 +56,11 @@ namespace FileExplorer.Core
             if (File.Exists(path))
             {
                 FileInfo info = new FileInfo(path);
-                if (info.Length <= 10000000)
+                if (info.Length <= 10 * 1048576)
                     folder.Less10Mb++;
-                if (info.Length >= 10000000 && info.Length <= 50000000)
+                if (info.Length >= 10 * 1048576 && info.Length <= 50 * 1048576)
                     folder.Mb10Mb50++;
-                if (info.Length >= 100000000)
+                if (info.Length >= 100 * 1048576)
                     folder.More100Mb++;
             }
         }
