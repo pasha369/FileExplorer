@@ -5,7 +5,7 @@ Server side:
 
 Client side:
 * AngularJS
-* 
+
 View:
 * Bootstrap Twitter
 * FontAwesome 
