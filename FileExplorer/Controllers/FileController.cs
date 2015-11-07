@@ -42,8 +42,7 @@ namespace FileExplorer.Controllers
             var dirs = DriveInfo.GetDrives().Select(dir => dir.Name);
             foreach (var dir in dirs)
             {
-                if(dir != "C:\\")
-                    helper.GetSizes(dir, folder);
+                helper.GetSizeCount(dir, folder);
             }
             folder.Dirs.AddRange(dirs);
 

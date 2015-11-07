@@ -32,3 +32,9 @@ ul > li {
 .head-title {
     border-bottom: 1px solid black;
 }
+
+    h3.head-title {
+        padding-left: 0;
+        padding-right: 0;
+        width: 120%;
+    }

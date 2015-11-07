@@ -34,6 +34,6 @@
                 $scope.loading = false;
             });
     };
-    // Call data init function.
+    // Call data init function. 
     Init();
 }]);

@@ -16,10 +16,11 @@ namespace FileExplorer.Core
         /// <param name="path"></param>
         /// <param name="folder">View model</param>
         /// <returns>Path to current dir</returns>
-        public string GetSizes(string path, Folder folder)
+        public string GetSizeCount(string path, Folder folder)
         {
             try
             {
+                if (File.Exists(path)) { CountFileSizes(path, folder); }
                 if (Directory.Exists(path))
                 {
                     foreach (var file in Directory.GetFiles(path))
@@ -30,20 +31,16 @@ namespace FileExplorer.Core
                     {
                         try
                         {
-                            GetSizes(subDir, folder);
+                            GetSizeCount(subDir, folder);
                         }
-                        catch
+                        catch (UnauthorizedAccessException)
                         {
                             // swallow, log, whatever
                         }
                     }
                 }
-                else
-                {
-                    CountFileSizes(path, folder);
-                }
             }
-            catch (Exception)
+            catch (UnauthorizedAccessException)
             {
                 // If error access denied move next.
             }
@@ -56,13 +53,16 @@ namespace FileExplorer.Core
         /// <param name="folder">View model</param>
         private void CountFileSizes(string path, Folder folder)
         {
-            FileInfo info = new FileInfo(path);
-            if (info.Length <= 10000000)
-                folder.Less10Mb++;
-            if (info.Length >= 10000000 && info.Length <= 50000000)
-                folder.Mb10Mb50++;
-            if (info.Length >= 100000000)
-                folder.More100Mb++;
+            if (File.Exists(path))
+            {
+                FileInfo info = new FileInfo(path);
+                if (info.Length <= 10000000)
+                    folder.Less10Mb++;
+                if (info.Length >= 10000000 && info.Length <= 50000000)
+                    folder.Mb10Mb50++;
+                if (info.Length >= 100000000)
+                    folder.More100Mb++;
+            }
         }
         /// <summary>
         /// Get sub dir by path and save them in folder field(Dirs).
@@ -72,7 +72,7 @@ namespace FileExplorer.Core
         public void GetDirs(string path, Folder folder)
         {
             Directory.GetDirectories(path)
-                .Select(dir => this.GetSizes(dir, folder))
+                .Select(dir => this.GetSizeCount(dir, folder))
                 .Select(dir => new DirectoryInfo(dir).Name)
                 .ForEach(dir => folder.Dirs.Add(dir));
         }
@@ -84,7 +84,7 @@ namespace FileExplorer.Core
         public void GetFiles(string path, Folder folder)
         {
             Directory.GetFiles(path)
-                .Select(file => this.GetSizes(file, folder))
+                .Select(file => this.GetSizeCount(file, folder))
                 .Select(file => new FileInfo(file).Name)
                 .ForEach(file => folder.Files.Add(file));
         }
